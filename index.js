@@ -20,6 +20,7 @@ var youtube = require('./plugins/youtube');
 var transcode = require('./plugins/transcode');
 var subtitles = require('./plugins/subtitles');
 var title = require('./plugins/title');
+var appid = require('./plugins/appid');
 
 if (opts.help) {
   return console.log([
@@ -39,6 +40,7 @@ if (opts.help) {
     '--bypass-srt-encoding   Disable automatic UTF8 encoding of SRT subtitles',
     '--seek <value>          Seek to the specified time on start using the format hh:mm:ss or mm:ss',
     '--title <value>         Set media title',
+    '--appid <value>         Set app id of a registered styled media receiver',
 
     '--help                  This help screen',
     '',
@@ -287,6 +289,7 @@ player.use(youtube);
 player.use(transcode);
 player.use(subtitles);
 player.use(title);
+player.use(appid);
 
 player.use(function(ctx, next) {
   if (ctx.mode !== 'launch') return next();

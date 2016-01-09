@@ -19,6 +19,7 @@ var torrent = require('./plugins/torrent');
 var youtube = require('./plugins/youtube');
 var transcode = require('./plugins/transcode');
 var subtitles = require('./plugins/subtitles');
+var title = require('./plugins/title');
 
 if (opts.help) {
   return console.log([
@@ -37,6 +38,7 @@ if (opts.help) {
     '--type <val>            Explicity set the mime-type (e.g. "video/mp4")',
     '--bypass-srt-encoding   Disable automatic UTF8 encoding of SRT subtitles',
     '--seek <value>          Seek to the specified time on start using the format hh:mm:ss or mm:ss',
+    '--title <value>         Set media title',
 
     '--help                  This help screen',
     '',
@@ -186,8 +188,8 @@ var ctrl = function(err, p, ctx) {
 
     // toggle between mute / unmute
     m: function() {
-      if(!volume) { 
-        return; 
+      if(!volume) {
+        return;
       } else if (volume.muted) {
         p.unmute(function(err, status) {
           if (err) return;
@@ -284,6 +286,7 @@ player.use(localfile);
 player.use(youtube);
 player.use(transcode);
 player.use(subtitles);
+player.use(title);
 
 player.use(function(ctx, next) {
   if (ctx.mode !== 'launch') return next();
